@@ -1,0 +1,295 @@
+<!HPBD html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chúc mừng sinh nhật</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1: #fceaff;
+      --bg2: #e0f7fa;
+      --accent: #ff80ab;
+      --btn1: #ffd1dc;
+      --btn2: #ffe0b2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2 { font-family: 'Great Vibes', cursive; }
+    .btn { font-family: 'Poppins', sans-serif; }
+
+    #intro {
+      position: relative;
+      height: 100vh;
+      background: url('anh1.jpg') center center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay {
+      background: rgba(0,0,0,0.4);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      color: white;
+    }
+    .overlay h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 24px;
+      background: var(--btn1);
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #333;
+    }
+    .btn:hover {
+      background: var(--btn2);
+      transform: scale(1.05);
+    }
+
+    #birthday {
+      display: none;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .message {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      line-height: 1.8;
+      color: #d63384;
+      text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.4);
+      background: rgba(255, 255, 255, 0.5);
+      padding: 20px;
+      border-radius: 16px;
+      border: 2px dashed #ffb6c1;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+    .message p {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 1s ease;
+    }
+    .message p.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .photo {
+      max-width: 400px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .confetti, .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .piece {
+      position: absolute;
+      width: 10px;
+      height: 18px;
+      background: hsl(var(--h) 80% 70%);
+      top: -20px;
+      left: var(--x);
+      opacity: 0.9;
+      transform: rotate(var(--r));
+      animation: fall var(--d) linear var(--delay) forwards;
+      border-radius: 3px;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(calc(var(--r) + 540deg));
+        opacity: 0.95;
+      }
+    }
+    .floating-heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('heart.png') center/contain no-repeat;
+      animation: floatUp 6s ease-in-out forwards;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+    .bubble {
+      position: absolute;
+      bottom: 0;
+      background: rgba(255,192,203,0.6);
+      border-radius: 50%;
+      animation: bubbleUp 8s linear forwards;
+    }
+    @keyframes bubbleUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0.8; }
+      100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(1); }
+      to   { opacity: 1; transform: scale(1.5); }
+    }
+@keyframes sparkle {
+  0% { filter: drop-shadow(0 0 2px pink); }
+  50% { filter: drop-shadow(0 0 8px hotpink); }
+  100% { filter: drop-shadow(0 0 2px pink); }
+}
+.heart-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 80px;
+  gap: 8px;
+  max-width: 500px;
+  margin: 40px auto;
+  position: relative;
+}
+.heart-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+.heart-grid img:hover { transform: scale(1.1); }
+
+/* Ví dụ bố cục trái tim (18 ảnh) */
+.heart-grid img:nth-child(1) { grid-column: 2; grid-row: 1; }
+.heart-grid img:nth-child(2) { grid-column: 3; grid-row: 1; }
+.heart-grid img:nth-child(3) { grid-column: 4; grid-row: 1; }
+.heart-grid img:nth-child(4) { grid-column: 5; grid-row: 1; }
+
+.heart-grid img:nth-child(5) { grid-column: 1; grid-row: 2; }
+.heart-grid img:nth-child(6) { grid-column: 2; grid-row: 2; }
+.heart-grid img:nth-child(7) { grid-column: 3; grid-row: 2; }
+.heart-grid img:nth-child(8) { grid-column: 4; grid-row: 2; }
+.heart-grid img:nth-child(9) { grid-column: 5; grid-row: 2; }
+.heart-grid img:nth-child(10){ grid-column: 6; grid-row: 2; }
+
+.heart-grid img:nth-child(11){ grid-column: 2; grid-row: 3; }
+.heart-grid img:nth-child(12){ grid-column: 3; grid-row: 3; }
+.heart-grid img:nth-child(13){ grid-column: 4; grid-row: 3; }
+.heart-grid img:nth-child(14){ grid-column: 5; grid-row: 3; }
+
+.heart-grid img:nth-child(15){ grid-column: 3; grid-row: 4; }
+.heart-grid img:nth-child(16){ grid-column: 4; grid-row: 4; }
+
+.heart-grid img:nth-child(17){ grid-column: 3; grid-row: 5; }
+.heart-grid img:nth-child(18){ grid-column: 4; grid-row: 5; }
+  </style>
+</head>
+<body>
+  <section id="intro">
+    <div class="overlay">
+      <h1>Chúc mừng sinh nhật chị Lan Anh!</h1>
+      <button class="btn" id="startBtn">Birthday</button>
+    </div>
+  </section>
+
+  <section id="birthday">
+    <div class="confetti"></div>
+    <div class="stars"></div>
+    <h1 style="color: var(--accent); font-size: 3rem; margin-bottom: 12px;">Chúc mừng sinh nhật chị Lan Anh!</h1>
+    <div class="message">
+      <p>Chúc chị Lan Anh tuổi mới ngập tràn niềm vui, hạnh phúc bên gia đình và những người thân yêu!</p>
+      <p>Em mong khi bước sang một tuổi mới, chị sẽ luôn đầy ắp những điều tuyệt vời, có thêm nhiều những hành trình thú vị, thăng tiến trong công việc và có những người bạn đồng hành thật tuyệt vời.</p>
+      <p>Đặc biệt là có anh Quang luôn bên cạnh — người mang đến cho chị những nụ cười dịu dàng, những cái nắm tay ấm áp và những ngày tháng thật bình yên.</p>
+      <p>Em tin rằng chị Lan Anh và anh Quang sẽ cùng nhau viết nên một hành trình đầy nắng ấm, nơi có những cái ôm dịu dàng, những ánh mắt thấu hiểu và những ngày tháng thật bình yên bên nhau.</p>
+      <p>💖💖💖</p>
+    </div>
+    <audio id="bgMusic" src="hpbd.mp3" preload="auto" loop></audio>
+    <img src="anh1.jpg" alt="Ảnh chúc mừng" class="photo" />
+<div class="heart-grid">
+<img src="anh1.jpg">
+<img src="anh2.jpg">
+<img src="anh3.jpg">
+<img src="anh4.jpg">
+<img src="anh5.jpg">
+<img src="anh6.jpg">
+<img src="anh7.jpg">
+<img src="anh8.jpg">
+<img src="anh9.jpg">
+<img src="anh10.jpg">
+<img src="anh11.jpg">
+<img src="anh12.jpg">
+<img src="anh13.jpg">
+<img src="anh14.jpg">
+<img src="anh15.jpg">
+<img src="anh16.jpg">
+<img src="anh17.jpg">
+
+<img src="anh18.jpg">
+</div>  
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("startBtn");
+    if (btn) {
+      btn.addEventListener("click", startBirthday);
+    }
+  });
+
+
+
+  function startBirthday() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("birthday").style.display = "block";
+
+    const audio = document.getElementById("bgMusic");
+    audio.play().catch(err => console.log("Autoplay bị chặn:", err));
+
+    launchConfetti(100);
+    showMessageLines(); // 👈 gọi hiệu ứng hiện chữ
+  }
+
+  function showMessageLines() {
+    const lines = document.querySelectorAll(".message p");
+    lines.forEach((line, i) => {
+      setTimeout(() => line.classList.add("show"), i * 1000);
+    });
+  }
+
+  function launchConfetti(count = 80) {
+    const container = document.querySelector(".confetti");
+    const colors = [0, 30, 60, 120, 180, 210, 260, 300, 330];
+    for (let i = 0; i < count; i++) {
+      const piece = document.createElement("div");
+      piece.className = "piece";
+      piece.style.setProperty("--x", Math.random() * 100 + "vw");
+      piece.style.setProperty("--r", Math.random() * 180 + "deg");
+      piece.style.setProperty("--d", (6 + Math.random() * 4) + "s");
+      piece.style.setProperty("--delay", Math.random() * 0.8 + "s");
+      piece.style.setProperty("--h", colors[Math.floor(Math.random() * colors.length)]);
+      container.appendChild(piece);
+      setTimeout(() => piece.remove(), 12000);
+    }
+  }
+</script>
+</body>
+</html>
+
